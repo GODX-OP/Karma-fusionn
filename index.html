@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KARMA SCRIPT</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('background.jpg') no-repeat center center/cover;
+            color: #0ff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            text-shadow: 0 0 10px cyan;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .glowing-text {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .glowing-time {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        .glowing-subtext {
+            font-size: 18px;
+            color: orange;
+            margin-top: 5px;
+        }
+
+        input, button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        input {
+            background-color: #222;
+            color: #fff;
+        }
+
+        button {
+            background-color: #0ff;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            text-shadow: none;
+        }
+
+        button:hover {
+            background-color: #ccc;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 14px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            text-align: left;
+            color: #fff;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="glowing-text">KARMA FUSION SCRIPT</h1>
+        <input type="text" id="textview1" placeholder="Enter Period Number">
+        <br>
+        <button onclick="generateResult()">GENERATE RESULT</button>
+        <br>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function generateResult() {
+            let textview1 = document.getElementById("textview1").value;
+            let result = document.getElementById("result");
+
+            if (!textview1 || textview1.length < 4) {
+                result.innerHTML = "Invalid period number";
+                return;
+            }
+
+            let periodNumber = parseInt(textview1.slice(-4));
+            let randomMultiplier = Math.floor(Math.random() * 2) + 1;
+            let resultValue = (periodNumber * randomMultiplier) % 10;
+
+            let displayResult = "";
+            let textColor = "green";
+
+            if ([0, 2, 4].includes(resultValue)) {
+                displayResult = `SMALL RED ${resultValue}`;
+                textColor = "red";
+            } else if ([6, 8].includes(resultValue)) {
+                displayResult = `BIG RED ${resultValue}`;
+                textColor = "red";
+            } else if ([1, 3].includes(resultValue)) {
+                displayResult = `SMALL GREEN ${resultValue}`;
+            } else {
+                displayResult = `BIG GREEN ${resultValue}`;
+            }
+
+            let fullText = `
+                PRESENTED BY KARMA\n\n
+                Win Go Prediction VIP SERVER\n\n
+                Patching Result.........10%\n
+                Patching Result.........20%\n
+                Patching Result.........30%\n
+                Patching Result.........40%\n
+                Patching Result.........50%\n
+                Patching Result.........60%\n
+                Patching Result.........70%\n
+                Patching Result.........80%\n
+                Patching Result.........90%\n
+                Patching Result.........100%\n\n
+                |===== WIN GO 30sec =====|\n\n
+                PERIOD NUMBER → ${textview1}\n\n
+                YOUR RESULT IS \n\n
+                →→→ ${displayResult} ←←←
+            `;
+
+            result.innerHTML = "";
+            let index = 0;
+            let delay = 8000 / fullText.length;
+            
+            function typeEffect() {
+                if (index < fullText.length) {
+                    result.innerHTML += fullText.charAt(index);
+                    index++;
+                    setTimeout(typeEffect, delay);
+                }
+            }
+            
+            typeEffect();
+            result.style.color = textColor;
+        }
+    </script>
+
+</body>
+</html>
